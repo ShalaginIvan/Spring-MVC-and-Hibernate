@@ -13,5 +13,7 @@ public interface UserService {
     List<User> listUsers();
 
     public void save (User user);
+
+    public void update(User user);
 }
 

@@ -1,6 +1,5 @@
 package web.dao;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -42,5 +41,14 @@ public class UserDaoImp implements UserDao{
     public void save(User user) {
         user.setId(++USER_COUNT);
         users.add(user);
+    }
+
+    @Override
+    public void update(User user) {
+        User userUpdate = getById(user.getId());
+
+        userUpdate.setFirstName(user.getFirstName());
+        userUpdate.setLastName(user.getLastName());
+        userUpdate.setEmail(user.getEmail());
     }
 }

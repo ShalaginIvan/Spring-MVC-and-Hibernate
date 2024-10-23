@@ -49,4 +49,29 @@ public class UsersController {
         model.addAttribute("user", user);
         return "redirect:/users";
     }
+
+    @GetMapping("/user/edit")
+    public String edit(@RequestParam(value = "id") Long id,
+                              ModelMap model) {
+        model.addAttribute("user", userService.getById(id));
+        return "edit";
+    }
+
+    @PostMapping("/users/update")
+    public String update (@RequestParam("id") Long id,
+                          @RequestParam("firstName") String firstName,
+                          @RequestParam("lastName") String lastName,
+                          @RequestParam("email") String email,
+                          ModelMap model) {
+        User user = new User();
+        user.setId(id);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        userService.update(user);
+
+        model.addAttribute("user", user);
+        return "redirect:/users";
+    }
+
 }

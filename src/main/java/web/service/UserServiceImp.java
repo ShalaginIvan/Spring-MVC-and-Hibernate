@@ -32,4 +32,9 @@ public class UserServiceImp implements UserService {
 
     public void save(User user) { userDao.save(user); }
 
+    @Override
+    public void update(User user) {
+        userDao.update(user);
+    }
+
 }

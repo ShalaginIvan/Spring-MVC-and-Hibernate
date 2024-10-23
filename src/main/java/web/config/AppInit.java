@@ -14,6 +14,8 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
 
+        // для отображения кириллицы и что бы Thymeleaf мог работать с аннотациями Patch и Delete
+        // реализация - см. ниже
         registerHiddenFieldFilter(aServletContext);
     }
     private void registerHiddenFieldFilter(ServletContext aContext) {

@@ -47,6 +47,10 @@
 
 <h2> </h2>
 <h2> </h2>
+<!-- Ссылка на страницу редактирования данных пользователя /users/edit?id=... -->
+<a th:href="@{/user/edit(id=${user.id})}" th:text="EditUser">EditUser</a>
+<h2> </h2>
+<h2> </h2>
 <!-- Ссылка на страницу списка всех пользователей /users -->
 <a th:href="@{/users}" th:text="UsersList">UsersList</a>
 
