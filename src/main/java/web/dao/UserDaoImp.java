@@ -11,7 +11,6 @@ import java.util.List;
 public class UserDaoImp implements UserDao{
     private static Long USER_COUNT = 0L;
 
-
     private List<User> users;
 
     public UserDaoImp() {
@@ -21,7 +20,7 @@ public class UserDaoImp implements UserDao{
         users.add(new User(++USER_COUNT,"Name2", "Surname2", "email2@test.com"));
         users.add(new User(++USER_COUNT,"Name3", "Surname3", "email3@test.com"));
         users.add(new User(++USER_COUNT,"Name4", "Surname4", "email4@test.com"));
-        users.add(new User(++USER_COUNT,"Name5", "Surname5", "email5@test.com"));
+        users.add(new User(++USER_COUNT,"Иван", "Шалагин", "иван@шалагин.com"));
     }
 
     @Override
