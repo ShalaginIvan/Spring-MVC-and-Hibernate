@@ -2,14 +2,12 @@ package web.dao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import web.model.Car;
 import web.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//@Repository
-@Component
+@Repository
 public class UserDaoImp implements UserDao{
     private static Long USER_COUNT = 0L;
 
