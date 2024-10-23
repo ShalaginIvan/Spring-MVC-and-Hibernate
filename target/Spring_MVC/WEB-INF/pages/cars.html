@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car List</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Car List</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>№</th> <!-- Столбец с номером строки -->
+        <th>Model</th>
+        <th>Series</th>
+        <th>Year of Release</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Итерация по списку машин с использованием Thymeleaf -->
+    <tr th:each="car, stat : ${carList}">
+        <!-- Номер строки -->
+        <td th:text="${stat.index + 1}">1</td> <!-- stat.index + 1 для отображения номера строки начиная с 1 -->
+        <td th:text="${car.model}">Model</td>
+        <td th:text="${car.series}">Series</td>
+        <td th:text="${car.yearOfRelease}">Year</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
