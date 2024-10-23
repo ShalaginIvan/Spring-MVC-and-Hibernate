@@ -47,10 +47,19 @@
 
 <h2> </h2>
 <h2> </h2>
+
 <!-- Ссылка на страницу редактирования данных пользователя /users/edit?id=... -->
 <a th:href="@{/user/edit(id=${user.id})}" th:text="EditUser">EditUser</a>
 <h2> </h2>
 <h2> </h2>
+
+<!-- Ссылка на страницу удаления пользователя /users/delete?id=... -->
+<form th:method="POST" th:action="@{/user/delete(id=${user.id})}" >
+        <input type="submit" value="Delete!" />
+</form>
+
+<br/>
+<hr/>
 <!-- Ссылка на страницу списка всех пользователей /users -->
 <a th:href="@{/users}" th:text="UsersList">UsersList</a>
 

@@ -51,4 +51,9 @@ public class UserDaoImp implements UserDao{
         userUpdate.setLastName(user.getLastName());
         userUpdate.setEmail(user.getEmail());
     }
+
+    @Override
+    public void delete(Long id) {
+        users.removeIf(p -> p.getId().equals(id));
+    }
 }

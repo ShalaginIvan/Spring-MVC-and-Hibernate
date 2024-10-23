@@ -3,9 +3,15 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import web.model.User;
 import web.service.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 public class UsersController {
@@ -23,7 +29,7 @@ public class UsersController {
     }
 
     @GetMapping("/user")
-      public String getUserById(@RequestParam(value = "id") Long id,
+      public String getUserById(@RequestParam("id") Long id,
         ModelMap model) {
         model.addAttribute("user", userService.getById(id));
         return "userById";
@@ -36,41 +42,42 @@ public class UsersController {
     }
 
     @PostMapping("/users")
-    public String create (@RequestParam("firstName") String firstName,
-                          @RequestParam("lastName") String lastName,
-                          @RequestParam("email") String email,
-                          ModelMap model) {
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        userService.save(user);
+    public String create (@ModelAttribute("user") @Valid User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "new";
+        }
 
-        model.addAttribute("user", user);
+        userService.save(user);
+        //model.addAttribute("user", user);
         return "redirect:/users";
     }
 
     @GetMapping("/user/edit")
-    public String edit(@RequestParam(value = "id") Long id,
+    public String edit(@RequestParam("id") Long id,
                               ModelMap model) {
         model.addAttribute("user", userService.getById(id));
         return "edit";
     }
 
     @PostMapping("/users/update")
-    public String update (@RequestParam("id") Long id,
-                          @RequestParam("firstName") String firstName,
-                          @RequestParam("lastName") String lastName,
-                          @RequestParam("email") String email,
-                          ModelMap model) {
-        User user = new User();
-        user.setId(id);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        userService.update(user);
+//    public String update (@RequestParam("id") Long id,
+//                          @RequestParam("firstName") @Valid String firstName, BindingResult b1,
+//                          @RequestParam("lastName") @Valid String lastName, BindingResult b2,
+//                          @RequestParam("email") @Valid String email, BindingResult b3,
+//                          ModelMap model) {
+    public String update (@ModelAttribute("user") @Valid User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "edit";
+        }
 
-        model.addAttribute("user", user);
+        userService.update(user);
+        //model.addAttribute("user", user);
+        return "redirect:/users";
+    }
+
+    @PostMapping("/user/delete")
+    public String delete(@RequestParam("id") Long id) {
+        userService.delete(id);
         return "redirect:/users";
     }
 

@@ -37,4 +37,9 @@ public class UserServiceImp implements UserService {
         userDao.update(user);
     }
 
+    @Override
+    public void delete(Long id) {
+        userDao.delete(id);
+    }
+
 }
