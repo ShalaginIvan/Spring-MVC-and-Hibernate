@@ -42,7 +42,7 @@ public class UsersController {
     }
 
     @PostMapping("/users")
-    public String create (@ModelAttribute("user") @Valid User user, BindingResult result) {
+    public String create (@Valid @ModelAttribute("user") User user, BindingResult result) {
         if (result.hasErrors()) {
             return "new";
         }
@@ -65,7 +65,7 @@ public class UsersController {
 //                          @RequestParam("lastName") @Valid String lastName, BindingResult b2,
 //                          @RequestParam("email") @Valid String email, BindingResult b3,
 //                          ModelMap model) {
-    public String update (@ModelAttribute("user") @Valid User user, BindingResult result) {
+    public String update (@Valid @ModelAttribute("user") User user, BindingResult result) {
         if (result.hasErrors()) {
             return "edit";
         }
