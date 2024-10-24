@@ -29,7 +29,7 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public User getById(Long id) {
-        return users.stream().filter(e->e.getId() == id).findAny().orElse(null);
+        return users.stream().filter(e -> e.getId().equals(id)).findAny().orElse(null);
     }
 
     @Override
