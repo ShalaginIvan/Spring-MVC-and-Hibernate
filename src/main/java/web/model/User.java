@@ -1,50 +1,38 @@
 package web.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-//@Entity
-//@Table(name = "users")
+@Entity
+@Table(name = "users")
 public class User {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column (name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private Long id;
 
-//    @Column(name = "name")
+    @Column(name = "name")
     @NotBlank(message = "FirstName should not be blank")
     @NotEmpty(message = "FirstName should not be empty")
     @Size(min = 2, max = 30, message = "FirstName should be between 2 and 30 characters")
     private String firstName;
 
-//    @Column(name = "last_name")
+    @Column(name = "last_name")
     @NotBlank(message = "LastName should not be blank")
     @NotEmpty(message = "LastName should not be empty")
     @Size(min = 2, max = 30, message = "LastName should be between 2 and 30 characters")
     private String lastName;
 
-//    @Column(name = "email")
+    @Column(name = "email")
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     private String email;
 
     public User() {}
-
-    public User(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
-
-    public User(Long id, String firstName, String lastName, String email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
 
     public Long getId() {
         return id;

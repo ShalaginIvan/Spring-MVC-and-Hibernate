@@ -3,57 +3,43 @@ package web.dao;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
 public class UserDaoImp implements UserDao{
-    private static Long USER_COUNT = 0L;
 
-    private List<User> users;
-
-    public UserDaoImp() {
-        this.users = new ArrayList<>();
-
-        users.add(new User(++USER_COUNT,"Name1", "Surname1", "email1@test.com"));
-        users.add(new User(++USER_COUNT,"Name2", "Surname2", "email2@test.com"));
-        users.add(new User(++USER_COUNT,"Name3", "Surname3", "email3@test.com"));
-        users.add(new User(++USER_COUNT,"Name4", "Surname4", "email4@test.com"));
-        users.add(new User(++USER_COUNT,"Иван", "Шалагин", "иван@шалагин.com"));
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
-    public void add(User user) {
-
-    }
-
-    @Override
+    @SuppressWarnings("unchecked")
     public User getById(Long id) {
-        return users.stream().filter(e -> e.getId().equals(id)).findAny().orElse(null);
+        return entityManager.find(User.class, id);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> listUsers() {
-        return users;
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u", User.class);
+        return query.getResultList();
     }
 
     @Override
     public void save(User user) {
-        user.setId(++USER_COUNT);
-        users.add(user);
+        entityManager.persist(user);
     }
 
     @Override
     public void update(User user) {
-        User userUpdate = getById(user.getId());
-
-        userUpdate.setFirstName(user.getFirstName());
-        userUpdate.setLastName(user.getLastName());
-        userUpdate.setEmail(user.getEmail());
+        entityManager.merge(user);
     }
 
     @Override
     public void delete(Long id) {
-        users.removeIf(p -> p.getId().equals(id));
+        User userDelete = getById(id);
+        entityManager.remove(entityManager.contains(userDelete) ? userDelete : entityManager.merge(userDelete));
     }
 }

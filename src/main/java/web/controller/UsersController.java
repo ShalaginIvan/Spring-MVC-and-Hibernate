@@ -43,40 +43,35 @@ public class UsersController {
 
     @PostMapping("/users")
     public String create (@Valid @ModelAttribute("user") User user, BindingResult result) {
+
         if (result.hasErrors()) {
             return "new";
         }
-
         userService.save(user);
-        //model.addAttribute("user", user);
         return "redirect:/users";
     }
 
     @GetMapping("/user/edit")
     public String edit(@RequestParam("id") Long id,
                               ModelMap model) {
+
         model.addAttribute("user", userService.getById(id));
         return "edit";
     }
 
     @PostMapping("/users/update")
-//    public String update (@RequestParam("id") Long id,
-//                          @RequestParam("firstName") @Valid String firstName, BindingResult b1,
-//                          @RequestParam("lastName") @Valid String lastName, BindingResult b2,
-//                          @RequestParam("email") @Valid String email, BindingResult b3,
-//                          ModelMap model) {
     public String update (@Valid @ModelAttribute("user") User user, BindingResult result) {
+
         if (result.hasErrors()) {
             return "edit";
         }
-
         userService.update(user);
-        //model.addAttribute("user", user);
         return "redirect:/users";
     }
 
     @PostMapping("/user/delete")
     public String delete(@RequestParam("id") Long id) {
+
         userService.delete(id);
         return "redirect:/users";
     }

@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface UserService {
 
-    void add(User user);
-
     public User getById(Long id);
 
     List<User> listUsers();
