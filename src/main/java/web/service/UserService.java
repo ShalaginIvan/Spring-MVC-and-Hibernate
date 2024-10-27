@@ -8,7 +8,7 @@ public interface UserService {
 
     public User getById(Long id);
 
-    List<User> listUsers();
+    List<User> getAll();
 
     public void save (User user);
 

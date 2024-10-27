@@ -22,9 +22,8 @@ public class UserDaoImp implements UserDao{
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<User> listUsers() {
-        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u", User.class);
-        return query.getResultList();
+    public List<User> getAll() {
+        return entityManager.createQuery("FROM User", User.class).getResultList();
     }
 
     @Override
